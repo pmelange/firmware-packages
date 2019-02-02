@@ -15,9 +15,20 @@ uci set freifunk.wifi_device_5.diversity='1'
 uci set freifunk.wifi_device_5.disabled='0'
 uci set freifunk.wifi_device_5.country='DE'
 
+uci set freifunk.wifi_iface_80211s=defaults
+uci set freifunk.wifi_iface_80211s.mode='mesh'
+uci set freifunk.wifi_iface_80211s.encryption='none'
+uci set freifunk.wifi_iface_80211s.mesh_id='Mesh-Freifunk'
+uci set freifunk.wifi_iface_80211s.mesh_fwding='0'
+
 uci set freifunk.olsr_interface=defaults
 uci set freifunk.olsr_interface.Ip4Broadcast='255.255.255.255'
 
 uci set freifunk.dhcp.leasetime='5m'
 
 uci commit freifunk
+
+uci set profile_berlin.wifi_iface_80211s=defaults
+uci set profile_berlin.wifi_iface_80211s.mesh_id='Mesh-Freifunk-Berlin'
+
+uci commit profile_berlin
