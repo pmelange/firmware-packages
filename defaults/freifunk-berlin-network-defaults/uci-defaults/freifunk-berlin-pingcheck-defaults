@@ -1,0 +1,12 @@
+#!/bin/sh
+
+. /lib/functions.sh
+
+# remove the sta interface, leaving only wan
+uci del pingcheck.@interface\[1\]
+
+# change the host to ping.berlin.freifunk.net
+uci set pingcheck.@default\[0\].host=77.87.48.12
+
+uci commit pingcheck
+
