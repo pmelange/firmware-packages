@@ -485,6 +485,12 @@ r1_1_0_firewall_remove_advanced() {
   config_foreach firewall_remove_advanced advanced
 }
 
+r1_1_0_pingcheck() {
+  # setup like in /etc/uci-defaults/freifunk-berlin-pingcheck-defaults
+  uci del pingcheck.@interface\[1\]
+  uci set pingcheck.@default\[0\].host=77.87.48.12
+}
+
 migrate () {
   log "Migrating from ${OLD_VERSION} to ${VERSION}."
 
@@ -553,6 +559,7 @@ migrate () {
     r1_1_0_update_uplink_notunnel_name
     r1_1_0_remove_olsrd_garbage_collection
     r1_1_0_remove_advanced_firewall
+    r1_1_0_pingcheck
   fi
 
   # overwrite version with the new version
