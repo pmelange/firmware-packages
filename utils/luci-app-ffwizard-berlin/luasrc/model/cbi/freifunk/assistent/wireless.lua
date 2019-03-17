@@ -149,15 +149,14 @@ function main.write(self, section, value)
       local pre = calcpre(devchannel)
       local ifaceSection = (pre == 2) and "wifi_iface" or "wifi_iface_5"
       local ifconfig = tools.getMergedConfig(mergeList, "defaults", ifaceSection)
-      local ifnameAdhoc = calcifcfg(device).."-".."adhoc".."-"..tostring(pre)
+      local ifnameAdhoc = calcifcfg(device).."-".."mesh".."-"..tostring(pre)
       ifconfig.device = device
       ifconfig.network = calcnif(device)
       ifconfig.ifname = ifnameAdhoc
-      ifconfig.mode = "adhoc"
+      ifconfig.mode = "mesh"
+      ifconfig.mesh_id = "Mesh-Freifunk-Berlin"
       -- don't set the dns entry
       ifconfig.dns = nil
-      ifconfig.ssid = uci:get(community, "ssidscheme", devconfig.channel)
-      ifconfig.bssid = uci:get(community, "bssidscheme", devconfig.channel)
       uci:section("wireless", "wifi-iface", nil, ifconfig)
       if statistics_installed then
         tools.statistics_interface_add("collectd_iwinfo", ifnameAdhoc)
